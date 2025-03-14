@@ -1,0 +1,37 @@
+<ProductDetailsScreen>:
+    name: "details_prod"  # Nom de l'écran
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "20dp"
+        spacing: "10dp"
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 1, "left": 1}
+            on_release: root.retourhome()
+
+        FitImage:
+            source: root.product.image if root.product else "assets/default_product.jpg"
+            size_hint_y: None
+            height: "200dp"
+
+        MDLabel:
+            text: root.product.name if root.product else "Nom du produit"
+            bold: True
+            size_hint_y: None
+            height: "30dp"
+
+        MDLabel:
+            text: f"{root.product.price} FCFA" if root.product else "Prix"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "30dp"
+
+        MDLabel:
+            text: root.product.description if root.product else "Description"
+            size_hint_y: None
+            height: "100dp"
+
+
+
+
+

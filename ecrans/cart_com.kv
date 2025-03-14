@@ -1,0 +1,16 @@
+<CommentaireCard@MDCard>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: "100dp"
+    padding: "10dp"
+    spacing: "10dp"
+
+    MDLabel:
+        text: f"commentaire de {root.commentaire.utilisateur.username} posté le {root.commentaire.date}"  if root.commentaire else '' # Afficher l'utilisateur et la date
+        font_style: "Subtitle1"
+        theme_text_color: "Primary"
+
+    MDLabel:
+        text: root.commentaire.commentaire if root.commentaire else '' # Afficher le texte du commentaire
+        font_style: "Body1"
+        theme_text_color: "Secondary"

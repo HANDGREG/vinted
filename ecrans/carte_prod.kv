@@ -1,0 +1,229 @@
+# <ReusableProductCard@MDCard>:
+#     orientation: 'vertical'
+#     size_hint: None, None
+#     size: "400dp", "500dp"
+#     padding: "10dp"
+#     spacing: "10dp"
+
+
+
+#     MDBoxLayout:
+            
+#         size_hint_y: None
+     
+#         height: "10dp"
+#         padding: "20dp"
+#         spacing: "10dp"
+        
+
+#         FitImage:
+#             source: root.product.image if root.product else ""
+#             size_hint: None, None
+#             size: "40dp", "40dp"
+#             radius: [20,]
+
+#         MDLabel:
+            
+#             text: str(root.product.seller_id if root.product and root.product.seller_id else "Nom d'utilisateur")
+#             bold: True
+#             size_hint_x: 0.8
+#             padding: "5dp"
+
+#     FitImage:
+#         source: root.product.image if root.product else ""
+#         size_hint_y: None
+#         height: "200dp"
+
+#     MDLabel:
+#         text: root.product.name if root.product else "Nom du produit"
+#         bold: True
+
+#     MDLabel:
+#         text: f"{root.product.price} FCFA" if root.product else "Prix"
+#         theme_text_color: "Secondary"
+
+#     MDRaisedButton:
+#         text: "Voir le produit"
+#         on_release: app.root.current = "product"
+
+
+    # MDBoxLayout:
+        
+    #     size_hint_y: None
+     
+    #     height: "10dp"
+    #     padding: "20dp"
+    #     spacing: "10dp"
+        
+
+    #     FitImage:
+    #         source: root.product.image if root.product else ""
+    #         size_hint: None, None
+    #         size: "40dp", "40dp"
+    #         radius: [20,]
+
+    #     MDLabel:
+            
+    #         text: str(root.product.seller_id if root.product and root.product.seller_id else "Nom d'utilisateur")
+    #         bold: True
+    #         size_hint_x: 0.8
+    #         padding: "5dp"
+
+
+
+    # FitImage:
+    #     source: root.product.image if root.product else ""
+    #     size_hint_y: None
+    #     height: "200dp"
+
+    # MDLabel:
+    #     text: root.product.name if root.product else "Nom du produit"
+    #     size_hint_y: None
+    #     height: "5dp"
+        
+    
+    # MDLabel:
+    #     text: f"{root.product.price} FCFA" if root.product else "Prix"
+    #     theme_text_color: "Secondary"
+
+
+    # MDBoxLayout:
+    #     size_hint_y: None
+    #     height: "10dp"
+    #     padding: "5dp"
+    #     spacing: "20dp"
+
+    #     MDIconButton:
+    #         icon: "heart-outline"
+    #         theme_icon_color: "Custom"
+    #         icon_color: 1, 0, 0, 1
+    #         on_release:
+    #             self.icon = "heart" if self.icon == "heart-outline" else "heart-outline"
+
+    #     MDIconButton:
+    #         icon: "share-variant"
+    #         theme_icon_color: "Custom"
+    #         icon_color: 0, 0, 1, 1
+
+    #     MDIconButton:
+    #         icon: "comment-outline"
+    #         theme_icon_color: "Custom"
+    #         icon_color: 0, 1, 0, 1
+
+
+    #     MDRaisedButton:
+    #         text: "Voir le produit"
+            
+    #         on_release: app.root.current = "product"
+
+
+
+
+
+
+<ReusableProductCard>:
+    orientation: 'vertical'
+    size_hint: None, None
+    size: "500dp", "400dp"
+    padding: "15dp"
+    spacing: "5dp"
+    # elevation: 5  # Pour s'assurer que la carte est bien visible
+    # radius: [15, 15, 15, 15]  # Pour arrondir légèrement la carte
+
+    
+    # Utiliser ClickableBoxLayout au lieu de MDBoxLayout
+    ClickableBoxLayout:
+        size_hint_y: None
+        height: "50dp"
+        padding: "10dp"
+        spacing: "10dp"
+        on_release: root.open_user_details()  # Gérer le clic sur le BoxLayout
+
+        # Photo de profil
+        FitImage:
+            source: root.product.seller.photo if root.product and root.product.seller else "assets/default_profile.jpg"
+            size_hint: None, None
+            size: "40dp", "40dp"
+            radius: [20,]
+
+        # Nom d'utilisateur
+        MDLabel:
+            text: root.product.seller.username if root.product and root.product.seller else "Nom d'utilisateur"
+            bold: True
+            size_hint_x: 1
+
+
+    # Photo du produit (cliquable)
+    ClickableFitImage:
+        source: root.product.image if root.product else "assets/default_product.jpg"
+        size_hint_y: None
+        height: "200dp"
+        on_release: root.open_product_details()  # Gérer le clic sur l'image du produit
+
+
+    # Nom du produit
+    MDLabel:
+        text: root.product.name if root.product else "Nom du produit"
+        bold: True
+        size_hint_y: None
+        height: "30dp"
+
+    # Prix du produit
+    MDLabel:
+        text: f"{root.product.price} FCFA" if root.product else "Prix"
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        height: "30dp"
+    MDSeparator:  # Séparateur après chaque carte
+        height: "2dp"
+        color: app.theme_cls.divider_color  # Utilise la couleur de séparateur du thème
+
+       # Boutons Like et Message avec labels
+    MDBoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        spacing: "10dp"
+        padding: "10dp"
+
+        # Bouton Like
+        MDIconButton:
+            id: like_button
+            icon:"heart" if root.like else "heart-outline"  # Icône remplie ou vide
+            theme_icon_color: "Custom"
+            icon_color: 1, 0, 0, 1  # Rouge
+            size_hint_x: None
+            width: "40dp"
+            on_release: root.toggle_like()
+
+        # Nombre de likes
+        MDLabel:
+            id: like_count
+            text: str(root.nbre_like) if root.nbre_like else "0"
+            size_hint_x: None
+            width: "40dp"
+            halign: "center"  # Centre le texte
+
+        # Bouton Message
+        MDIconButton:
+            id: message_button
+            icon: "message-outline"
+            theme_icon_color: "Custom"
+            icon_color: 0, 0, 1, 1  # Bleu
+            size_hint_x: None
+            width: "40dp"
+            on_release: root.commentaire()
+
+        # Nombre de commentaires
+        MDLabel:
+            id: comment_count
+            text:  str(root.nbre_commentaire) if root.nbre_commentaire else "0"
+            size_hint_x: None
+            width: "40dp"
+            halign: "center"  # Centre le texte
+   
+
+
+<ProductCardWithSeparator>:
+    orientation: "vertical"
+    spacing: "0dp"
+    

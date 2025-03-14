@@ -1,0 +1,34 @@
+<UserDetailsScreen>:
+    name: "details_user"  # Nom de l'écran
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 1, "left": 1}
+            on_release: root.retourhome()
+
+
+        FitImage:
+            source: root.user.photo if root.user else "assets/default_profile.jpg"
+            size_hint_y: None
+            height: "200dp"
+
+        MDLabel:
+            text: root.user.username if root.user else "Nom d'utilisateur"
+            bold: True
+            size_hint_y: None
+            height: "30dp"
+
+        MDLabel:
+            text: root.user.email if root.user else "Email"
+            size_hint_y: None
+            height: "30dp"
+
+
+
+     
+
+

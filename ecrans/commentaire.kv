@@ -1,0 +1,66 @@
+<CommentairesScreen>:
+    name: "commentaire"
+    BoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "10dp"
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 1, "left": 1}
+            on_release: root.retour()
+        MDBoxLayout:
+                
+            size_hint_y: None
+            height: "50dp"
+            padding: "10dp"
+            spacing: "10dp"
+           
+            # Photo de profil
+            FitImage:
+                source: root.produit.seller.photo if root.produit and root.produit.seller else "assets/default_profile.jpg"
+                size_hint: None, None
+                size: "40dp", "40dp"
+                radius: [20,]
+
+            # Nom d'utilisateur
+            MDLabel:
+                text: root.produit.seller.username if root.produit and root.produit.seller else "Nom d'utilisateur"
+                bold: True
+                size_hint_x: 1
+
+        FitImage:
+
+            source: root.produit.image if root.produit else "assets/default_product.jpg"
+            size_hint_y: None
+            height: "200dp"
+            
+
+        RecycleView:
+            id: rv_commentaires
+            viewclass: "CommentaireCard"
+            RecycleBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: "10dp"
+                default_size_hint: 1, None
+                default_size: None, "100dp"
+        
+
+         # Zone de saisie et bouton d'envoi
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "10dp"
+            spacing: "10dp"
+
+            MDTextField:
+                id: input_commentaire
+                hint_text: "Écrire un commentaire..."
+                size_hint_x: 0.8
+                multiline: False  # Une seule ligne de texte
+
+            MDIconButton: 
+                icon: "send"  
+                size_hint_x: 0.2
+                on_release: root.Ajout_commentaire()  # Appeler la méthode pour envoyer le commentaire
