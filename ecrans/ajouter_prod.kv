@@ -1,87 +1,158 @@
-<Ajouter>:
-    name:'ajouter'
+# <Ajouter>:
+#     name:'ajouter'
 
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 10
+#     BoxLayout:
+#         orientation: 'vertical'
+#         padding: 20
+#         spacing: 10
         
-        MDIconButton:
-            icon: "arrow-left"
-            pos_hint: {"top": 1, "left": 1}
-            on_release: root.retour()
+#         MDIconButton:
+#             icon: "arrow-left"
+#             pos_hint: {"top": 1, "left": 1}
+#             on_release: root.retour()
+
+#         MDLabel:
+#             text: 'AJOUTER UN PRODUIT A VENDRE'
+#             halign: 'center'
+#             font_style: 'H5'
+#             size_hint_y: None
+#             pos_hint: {'center_x': 0.5,'center_y': 0.9}
+#             height: self.texture_size[1]
+                        
+
+#         MDCard:
+           
+#             orientation: 'vertical'
+#             size_hint: None, None
+#             size: "500dp", "500dp"
+#             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+#             elevation: 20 # Effet de surélévation
+#             padding: '20dp'
+#             spacing: '5dp'
+
+
+           
+                
+#             MDTextField:
+#                 id: name
+                
+#                 hint_text: "entrez le nom du prosuit"
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+                
+#             MDTextField:
+#                 id: description
+                
+#                 hint_text: "petite description du produits"
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+#             MDTextField:
+#                 id: prix
+               
+#                 hint_text: "fixer un prix pour votre produit"
+                
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+#             MDTextField:
+#                 id: image
+                
+#                 hint_text: "entrez l'image de votre produit"
+                
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+
+
+            
+
+#             MDRaisedButton:
+#                 text: 'valider'
+#                 style:'elevated'
+#                 pos_hint: {'center_x': 0.5}
+#                 size_hint: None, None
+#                 size: "400dp", "400dp"
+#                 on_release: root.ajouter_prod()
+#         MDFloatLayout:
+#             spacing: '0dp'
+                
+            
+#             orientation: 'horizontal'
+           
+         
+
+
+
+
+
+<Ajouter>:
+    name: 'ajouter'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+
+        MDTopAppBar:
+            title: "Ajouter un produit"
+            elevation: 3
+            left_action_items: [["arrow-left", lambda x: root.retour()]]
 
         MDLabel:
-            text: 'AJOUTER UN PRODUIT A VENDRE'
+            text: "AJOUTER UN PRODUIT À VENDRE"
             halign: 'center'
             font_style: 'H5'
             size_hint_y: None
-            pos_hint: {'center_x': 0.5,'center_y': 0.9}
             height: self.texture_size[1]
-                        
 
         MDCard:
-           
             orientation: 'vertical'
             size_hint: None, None
-            size: "500dp", "500dp"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            elevation: 20 # Effet de surélévation
-            padding: '20dp'
-            spacing: '5dp'
+            size: dp(380), dp(520)
+            pos_hint: {'center_x': 0.5}
+            elevation: 12
+            padding: dp(20)
+            spacing: dp(10)
+            radius: [20, 20, 20, 20]
 
-
-           
-                
             MDTextField:
                 id: name
-                
-                hint_text: "entrez le nom du prosuit"
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                hint_text: "Nom du produit"
+                icon_right: "tag"
+                mode: "rectangle"
 
-                
             MDTextField:
                 id: description
-                
-                hint_text: "petite description du produits"
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                hint_text: "Description du produit"
+                icon_right: "text"
+                mode: "rectangle"
+
             MDTextField:
                 id: prix
-               
-                hint_text: "fixer un prix pour votre produit"
-                
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                hint_text: "Prix du produit"
+                icon_right: "currency-xaf"
+                mode: "rectangle"
+                input_filter: 'float'
 
             MDTextField:
-                id: image
-                
-                hint_text: "entrez l'image de votre produit"
-                
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
-
-
-
-            
+                id: image_path
+                hint_text: "Chemin de l'image"
+                icon_right: "image"
+                mode: "rectangle"
+                readonly: True
 
             MDRaisedButton:
-                text: 'valider'
-                style:'elevated'
+                text: "Choisir une image"
+                icon: "folder"
+                pos_hint: {"center_x": 0.5}
+                on_release: root.open_file_manager()
+
+            MDRaisedButton:
+                text: "Valider"
                 pos_hint: {'center_x': 0.5}
-                size_hint: None, None
-                size: "400dp", "400dp"
                 on_release: root.ajouter_prod()
-        MDFloatLayout:
-            spacing: '0dp'
-                
-            
-            orientation: 'horizontal'
-           
-         

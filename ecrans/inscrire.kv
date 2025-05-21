@@ -1,109 +1,206 @@
-<Register>:
-    name:'inscrire'
+# <Register>:
+#     name:'inscrire'
 
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 10
+#     BoxLayout:
+#         orientation: 'vertical'
+#         padding: 20
+#         spacing: 10
         
             
-        MDLabel:
-            text: 'INSCRIPTIONS'
-            halign: 'center'
-            font_style: 'H5'
-            size_hint_y: None
-            pos_hint: {'center_x': 0.5,'center_y': 0.9}
-            height: self.texture_size[1]
+#         MDLabel:
+#             text: 'INSCRIPTIONS'
+#             halign: 'center'
+#             font_style: 'H5'
+#             size_hint_y: None
+#             pos_hint: {'center_x': 0.5,'center_y': 0.9}
+#             height: self.texture_size[1]
                         
 
-        MDCard:
+#         MDCard:
            
+#             orientation: 'vertical'
+#             size_hint: None, None
+#             size: "500dp", "500dp"
+#             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+#             elevation: 20 # Effet de surélévation
+#             padding: '20dp'
+#             spacing: '5dp'
+
+
+#             MDTextField:
+#                 id: username
+#                 icon_right: 'account'
+#                 hint_text: "entrez votre nom d'utilisateur"
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+                
+#             MDTextField:
+#                 id: mail
+#                 icon_right: 'mail'
+#                 hint_text: "entrez votre email"
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+                
+#             MDTextField:
+#                 id: password
+#                 icon_right: 'password'
+#                 hint_text: "entrez votre mot de passe"
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+#             MDTextField:
+#                 id: adresse
+#                 icon_right: 'home'
+#                 hint_text: "entrez votre adresse de residence"
+                
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+#             MDTextField:
+#                 id: telephone
+#                 icon_right: 'phone'
+#                 hint_text: "numero de telephone"
+                
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+
+#             MDTextField:
+#                 id: photo
+#                 icon_right: 'account'
+#                 hint_text: "photo de profil"
+#                 helper_text: 'veuillez entrer le chemin dacces de votre image'
+#                 size_hint: None, None
+#                 size: '300dp', '48dp'
+#                 pos_hint: {'center_x': 0.5}
+
+            
+
+#             MDRaisedButton:
+#                 text: 'valider'
+#                 style:'elevated'
+#                 pos_hint: {'center_x': 0.5}
+#                 size_hint: None, None
+#                 size: "400dp", "400dp"
+#                 on_release: root.inscription()
+#         MDFloatLayout:
+#             spacing: '0dp'
+                
+            
+#             orientation: 'horizontal'
+#             MDLabel:
+#                 size_hint: None, None
+#                 size: '300dp', '200dp'  # Taill
+#                 text: "j'ai deja un compte"
+#                 pos_hint: {'center_x': 0.5,'center_y': 0.5}
+#                 font_style: 'Subtitle1'
+#             MDTextButton:
+#                 theme_text_color: 'Custom'
+#                 text: 'se connecter'
+#                 style:'text'
+#                 pos_hint: {'center_x': 0.6,'center_y': 0.5}
+#                 text_color: 0, 0, 1, 1  # Texte bleu
+#                 on_release: root.compteexistant()
+
+
+
+
+
+
+
+<Register>:
+    name: 'inscrire'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(20)
+        adaptive_height: True
+
+        MDLabel:
+            text: 'INSCRIPTION'
+            halign: 'center'
+            font_style: 'H4'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDCard:
             orientation: 'vertical'
             size_hint: None, None
-            size: "500dp", "500dp"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            elevation: 20 # Effet de surélévation
-            padding: '20dp'
-            spacing: '5dp'
-
+            size: dp(380), dp(520)
+            pos_hint: {'center_x': 0.5}
+            elevation: 12
+            padding: dp(20)
+            spacing: dp(10)
+            radius: [20, 20, 20, 20]
 
             MDTextField:
                 id: username
                 icon_right: 'account'
-                hint_text: "entrez votre nom d'utilisateur"
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
-                
+                hint_text: "Nom d'utilisateur"
+                mode: "rectangle"
+
             MDTextField:
                 id: mail
-                icon_right: 'mail'
-                hint_text: "entrez votre email"
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                icon_right: 'email'
+                hint_text: "Adresse email"
+                mode: "rectangle"
 
-                
             MDTextField:
                 id: password
-                icon_right: 'password'
-                hint_text: "entrez votre mot de passe"
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                icon_right: 'lock'
+                hint_text: "Mot de passe"
+                password: True
+                mode: "rectangle"
+
             MDTextField:
                 id: adresse
                 icon_right: 'home'
-                hint_text: "entrez votre adresse de residence"
-                
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
+                hint_text: "Adresse de résidence"
+                mode: "rectangle"
 
             MDTextField:
                 id: telephone
                 icon_right: 'phone'
-                hint_text: "numero de telephone"
-                
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
-
+                hint_text: "Numéro de téléphone"
+                mode: "rectangle"
 
             MDTextField:
-                id: photo
-                icon_right: 'account'
-                hint_text: "photo de profil"
-                helper_text: 'veuillez entrer le chemin dacces de votre image'
-                size_hint: None, None
-                size: '300dp', '48dp'
-                pos_hint: {'center_x': 0.5}
-
-            
+                id: photo_path
+                hint_text: "Chemin de la photo (lecture seule)"
+                icon_right: "image"
+                readonly: True
+                mode: "rectangle"
 
             MDRaisedButton:
-                text: 'valider'
-                style:'elevated'
-                pos_hint: {'center_x': 0.5}
-                size_hint: None, None
-                size: "400dp", "400dp"
-                on_release: root.inscription()
-        MDFloatLayout:
-            spacing: '0dp'
-                
-            
-            orientation: 'horizontal'
-            MDLabel:
-                size_hint: None, None
-                size: '300dp', '200dp'  # Taill
-                text: "j'ai deja un compte"
-                pos_hint: {'center_x': 0.5,'center_y': 0.5}
-                font_style: 'Subtitle1'
-            MDTextButton:
-                theme_text_color: 'Custom'
-                text: 'se connecter'
-                style:'text'
-                pos_hint: {'center_x': 0.6,'center_y': 0.5}
-                text_color: 0, 0, 1, 1  # Texte bleu
-                on_release: root.compteexistant()
+                text: "Choisir une photo"
+                icon: "folder"
+                pos_hint: {"center_x": 0.5}
+                on_release: root.open_file_manager()
 
+            MDRaisedButton:
+                text: "Valider"
+                pos_hint: {'center_x': 0.5}
+                on_release: root.inscription()
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            spacing: dp(5)
+            padding: dp(10)
+            pos_hint: {'center_x': 0.5}
+
+            MDLabel:
+                text: "J'ai déjà un compte"
+                halign: 'right'
+
+            MDTextButton:
+                text: "Se connecter"
+                text_color: 0, 0, 1, 1
+                on_release: root.compteexistant()

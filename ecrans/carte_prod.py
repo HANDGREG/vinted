@@ -37,6 +37,7 @@ class ReusableProductCard(MDCard):
             
             # Passer les données du produit à l'écran de détails
             app.root.get_screen("details_prod").product = self.product
+            app.root.get_screen("details_prod").user = self.user
             
     def open_user_details(self):
         """
