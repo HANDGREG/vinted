@@ -1,0 +1,34 @@
+<ConversationScreen>:
+    name: "conversations"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "0dp"
+        padding: "0dp"
+
+        MDTopAppBar:
+            title: "Mes conversations"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: root.retour()]]
+            # Remplace "home_screen" par le nom de ton écran d'accueil
+
+        MDLabel:
+            text: "Retrouvez ici l'historique de vos discussions"
+            halign: "center"
+            theme_text_color: "Hint"
+            font_style: "Subtitle2"
+            size_hint_y: None
+            height: self.texture_size[1] + dp(24)
+            padding: [0, dp(8)]
+
+        ScrollView:
+            RecycleView:
+                id: rv_conversations
+                viewclass: "ConversationCard"
+                # key_viewclass: "viewclass"
+                # key_size: "height"
+                RecycleBoxLayout:
+                    default_size: None, dp(80)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'

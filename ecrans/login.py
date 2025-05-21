@@ -10,7 +10,7 @@
 #                 self.parent.current = "home"
                 
 #                 self.parent.ids.screen_manager.transition.direction = "left"
-#             else:
+#             else:from kivymd.uix.button.button import MDButton
 #                 self.root.ids.error_label.text = "Mot de passe incorrect"
 #                 self.root.ids.password.text = ""
 #         else:
@@ -21,7 +21,7 @@
 
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDRaisedButton, MDFlatButton, MDTextButton
 from kivymd.uix.dialog import MDDialog
 from database.crud import get_user_by_username, verify_password
 from kivymd.app import MDApp
@@ -50,6 +50,9 @@ class Loginscreen(Screen):
                 
                 self.parent.current = "home"
                 self.parent.transition.direction = "left"
+                self.ids.password.text = ""
+                self.ids.username.text = ""  # Réinitialiser le champ du nom d'utilisateur
+                
             else:
                 # Mot de passe incorrect
                 self.show_error_dialog("Mot de passe incorrect")

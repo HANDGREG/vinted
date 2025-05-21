@@ -1,37 +1,108 @@
+# <ProductDetailsScreen>:
+#     name: "details_prod"  # Nom de l'écran
+#     MDBoxLayout:
+#         orientation: 'vertical'
+#         padding: "20dp"
+#         spacing: "10dp"
+#         MDIconButton:
+#             icon: "arrow-left"
+#             pos_hint: {"top": 1, "left": 1}
+#             on_release: root.retourhome()
+
+#         FitImage:
+#             source: root.product.image if root.product else "assets/default_product.jpg"
+#             size_hint_y: None
+#             height: "200dp"
+
+#         MDLabel:
+#             text: root.product.name if root.product else "Nom du produit"
+#             bold: True
+#             size_hint_y: None
+#             height: "30dp"
+
+#         MDLabel:
+#             text: f"{root.product.price} FCFA" if root.product else "Prix"
+#             theme_text_color: "Secondary"
+#             size_hint_y: None
+#             height: "30dp"
+
+#         MDLabel:
+#             text: root.product.description if root.product else "Description"
+#             size_hint_y: None
+#             height: "100dp"
+
+
+
+
+
 <ProductDetailsScreen>:
-    name: "details_prod"  # Nom de l'écran
+    name: "details_prod"
     MDBoxLayout:
         orientation: 'vertical'
-        padding: "20dp"
-        spacing: "10dp"
-        MDIconButton:
-            icon: "arrow-left"
-            pos_hint: {"top": 1, "left": 1}
-            on_release: root.retourhome()
+        padding: "0dp"
+        spacing: "0dp"
 
-        FitImage:
-            source: root.product.image if root.product else "assets/default_product.jpg"
-            size_hint_y: None
-            height: "200dp"
+        MDTopAppBar:
+            title: "Détails du produit"
+            left_action_items: [["arrow-left", lambda x: root.retourhome()]]
+            elevation: 4
 
-        MDLabel:
-            text: root.product.name if root.product else "Nom du produit"
-            bold: True
-            size_hint_y: None
-            height: "30dp"
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "24dp"
+                spacing: "20dp"
+                size_hint_y: None
+                height: self.minimum_height
 
-        MDLabel:
-            text: f"{root.product.price} FCFA" if root.product else "Prix"
-            theme_text_color: "Secondary"
-            size_hint_y: None
-            height: "30dp"
+                MDCard:
+                    orientation: 'vertical'
+                    padding: "16dp"
+                    radius: [20, 20, 20, 20]
+                    elevation: 6
+                    size_hint_y: None
+                    height: self.minimum_height
 
-        MDLabel:
-            text: root.product.description if root.product else "Description"
-            size_hint_y: None
-            height: "100dp"
+                    FitImage:
+                        source: root.product.image if root.product else "assets/default_product.jpg"
+                        size_hint_y: None
+                        height: "220dp"
+                        radius: [16, 16, 16, 16]
 
+                    MDLabel:
+                        text: root.product.name if root.product else "Nom du produit"
+                        font_style: "H6"
+                        halign: "center"
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1] + 10
 
+                    MDLabel:
+                        text: f"{root.product.price} FCFA" if root.product else "Prix"
+                        font_style: "Subtitle1"
+                        theme_text_color: "Custom"
+                        text_color: app.theme_cls.primary_color
+                        halign: "center"
+                        size_hint_y: None
+                        height: self.texture_size[1] + 10
 
+                    MDSeparator:
+                        height: "1dp"
 
+                    MDLabel:
+                        text: root.product.description if root.product else "Description"
+                        font_style: "Body1"
+                        halign: "center"
+                        size_hint_y: None
+                        height: self.texture_size[1] + 20
+
+        MDFillRoundFlatButton:
+            text: "Contacter le vendeur"
+            pos_hint: {"center_x": 0.5}
+            md_bg_color:app.theme_cls.primary_color
+            text_color: 1, 1, 1, 1
+            size_hint_x: 0.8
+            on_release: root.contact_vendeur()
+            padding: "12dp"
+            margin: "16dp"
 

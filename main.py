@@ -13,6 +13,11 @@ from ecrans.inscrire import Register
 from ecrans.ajouter_prod import Ajouter
 from ecrans.profile import Profile
 from ecrans.commentaire import CommentairesScreen
+from ecrans.conversation import ConversationScreen
+from ecrans.discussion import DiscussionScreen
+
+
+from ecrans.cart_conv import ConversationCard
 
 
 
@@ -21,15 +26,12 @@ from ecrans.commentaire import CommentairesScreen
 
 class VintedApp(MDApp):
     def build(self):
-        
-        
-        
-
+        # Charger les fichiers KV
         Builder.load_file("ecrans/carte_prod.kv")
         Builder.load_file("ecrans/cart_com.kv")
+        Builder.load_file("ecrans/cart_conv.kv")
         # Charger les fichiers KV
         Builder.load_file("ecrans/acceuil.kv")
-
         Builder.load_file("ecrans/details_prod.kv")
         Builder.load_file("ecrans/details_user.kv")
         Builder.load_file("ecrans/login.kv")
@@ -37,6 +39,8 @@ class VintedApp(MDApp):
         Builder.load_file("ecrans/ajouter_prod.kv")
         Builder.load_file("ecrans/profile.kv")
         Builder.load_file("ecrans/commentaire.kv")
+        Builder.load_file("ecrans/conversation.kv")
+        Builder.load_file("ecrans/discussion.kv")
         # Initialiser la base de données
         initialize_db()
         
@@ -76,21 +80,44 @@ class VintedApp(MDApp):
             
             
         # )
+        
+        
+           
+        # envoi_message(
+
+        #     sender="3",
+        #     receiver="1",
+           
+        #     content="C'était free"
+            
+            
+        # )
+        # envoi_message(
+
+        #     sender="1",
+        #     receiver="3",
+           
+        #     content="gar ceyais la magie"
+            
+            
+        # )
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Pink"
+        self.theme_cls.primary_palette = "Red"
 
         # Créer un gestionnaire d'écrans
         sm = ScreenManager()
+        
         sm.add_widget(Loginscreen(name="login"))
         sm.add_widget(Register(name="inscrire"))
         sm.add_widget(HomeScreen(name="home"))
-        sm.add_widget(HomeScreen(name="home"))
+        sm.add_widget(ConversationScreen(name="conversations"))
         sm.add_widget(ProductDetailsScreen(name="details_prod"))
         sm.add_widget(UserDetailsScreen(name="details_user"))
         sm.add_widget(Ajouter(name="ajouter"))
         sm.add_widget(Profile(name="profile"))
         sm.add_widget(CommentairesScreen(name="commentaire"))
-        # sm.add_widget(Loginscreen(name="login"))
+        sm.add_widget(ConversationScreen(name="conversations"))
+        sm.add_widget(DiscussionScreen(name="discussion"))
         # sm.add_widget(Register(name="inscrire"))
         return sm
 

@@ -41,7 +41,23 @@ class Commentaire(BaseModel):
     date = DateField(default=date.today)
 
 # Créer les tables dans la base de données
+
+class Discussion(BaseModel):
+    user1 = ForeignKeyField(User, backref='discussions1')
+    user2 = ForeignKeyField(User, backref='discussions2')
+
+class Message(BaseModel):
+    discussion = ForeignKeyField(Discussion, backref='messages')
+    sender = ForeignKeyField(User, backref='sent_messages')
+    receiver = ForeignKeyField(User, backref='received_messages')
+    content = TextField()
+    created_at = DateField(default=date.today)
+    
+    
+
+
 def initialize_db():
     db.connect()
-    db.create_tables([User, Produit,Commentaire,Like], safe=True)
+    db.create_tables([User, Produit,Commentaire,Like,Discussion,Message], safe=True)
+    
     

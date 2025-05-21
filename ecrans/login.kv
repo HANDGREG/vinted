@@ -9,6 +9,7 @@
         MDLabel:
             
             text: 'CONNEXION'
+            bold: True
             halign: 'center'
             font_style: 'H5'
             size_hint_y: None
@@ -19,7 +20,7 @@
         MDCard:
             theme_shadow_color: "Custom"
             shadow_color:app.theme_cls.primary_color
-           
+            adaptive_height: True
             orientation: 'vertical'
             size_hint: None, None
             size: "400dp", "200dp"
@@ -31,6 +32,7 @@
 
             MDTextField:
                 id: username
+                mode: "rectangle"
                 icon_right: 'account'
                 hint_text: "entrez votre nom d'utilisateur"
                 size_hint: None, None
@@ -42,7 +44,10 @@
                 
             MDTextField:
                 id: password
+                mode: "rectangle"
                 icon_right: 'password'
+                password: True
+                icon_right_color: app.theme_cls.primary_color
                 hint_text: "entrez votre mot de passe"
                 size_hint: None, None
                 size: '300dp', '48dp'
@@ -72,3 +77,153 @@
                 pos_hint: {'center_x': 0.6,'center_y': 0.5}
                 text_color: app.theme_cls.primary_color  # Texte bleu
                 on_release: root.jenaipasdecompte()
+
+
+
+
+
+
+# <LoginScreen>:
+#     name: "login"
+    
+#     # Layout principal avec fond adaptatif
+#     BoxLayout:
+#         orientation: 'vertical'
+#         padding: dp(20)  # Padding réduit pour mobiles
+#         spacing: dp(20)
+#         md_bg_color: app.theme_cls.bg_normal
+
+#         # Espacement supérieur pour centrer verticalement
+#         Widget:
+#             size_hint_y: 0.2
+
+#         # Titre avec logo
+#         BoxLayout:
+#             orientation: 'horizontal'
+#             size_hint_y: None
+#             height: dp(60)
+#             spacing: dp(10)
+#             pos_hint: {'center_x': 0.5}
+
+#             MDIcon:
+#                 icon: "account-circle"
+#                 size_hint: None, None
+#                 size: dp(48), dp(48)
+#                 theme_text_color: "Primary"
+#                 pos_hint: {'center_y': 0.5}
+
+#             MDLabel:
+#                 text: 'CONNEXION'
+#                 halign: 'left'
+#                 font_style: 'H4'
+#                 theme_text_color: "Primary"
+#                 bold: True
+#                 size_hint_x: 0.8
+#                 pos_hint: {'center_y': 0.5}
+
+#         # Carte formulaire avec animations
+#         MDCard:
+#             id: login_card
+#             orientation: 'vertical'
+#             adaptive_height: True
+#             size_hint: (0.9, None)
+#             height: dp(280) 
+#             pos_hint: {'center_x': 0.5}
+#             elevation: 8  # Ombre plus prononcée
+#             radius: [dp(15),]
+#             padding: [dp(20), dp(20), dp(20), dp(10)]
+#             spacing: dp(12)
+#             md_bg_color: app.theme_cls.bg_dark
+#             ripple_behavior: True
+
+#             # Champ utilisateur avec validation
+#             MDTextField:
+#                 id: username
+#                 icon_left: 'account'
+#                 hint_text: "Email ou nom d'utilisateur"
+#                 size_hint_x: 1
+#                 mode: "fill"
+#                 fill_color_normal: app.theme_cls.bg_dark
+#                 helper_text: "Format: user@example.com"
+#                 helper_text_mode: "on_focus"
+#                 required: True
+#                 on_text_validate: password.focus = True
+
+#             # Champ mot de passe sécurisé
+#             MDTextField:
+#                 id: password
+#                 icon_left: 'lock'
+#                 icon_right: 'eye-off'
+#                 hint_text: "Mot de passe"
+#                 size_hint_x: 1
+#                 password: True
+#                 mode: "fill"
+#                 helper_text: "8 caractères minimum"
+#                 helper_text_mode: "on_focus"
+#                 on_text_validate: root.login()
+#                 on_icon_right: root.toggle_password_visibility()
+
+#             # Label d'erreur
+#             MDLabel:
+#                 id: login_error
+#                 text: ""
+#                 markup: True
+#                 theme_text_color: "Error"
+#                 halign: "center"
+#                 size_hint_y: None
+#                 height: dp(20)
+
+#             # Bouton de connexion avec indicateur
+#             MDRoundFlatButton:
+#                 id: login_btn
+#                 text: 'SE CONNECTER'
+#                 pos_hint: {'center_x': 0.5}
+#                 size_hint_x: 1
+#                 md_bg_color: app.theme_cls.primary_color
+#                 text_color: 1, 1, 1, 1
+#                 line_color: 0, 0, 0, 0
+#                 on_release: root.login()
+#                 disabled: not username.text or len(password.text) < 6
+
+#                 MDSpinner:
+#                     id: login_spinner
+#                     size_hint: None, None
+#                     size: dp(20), dp(20)
+#                     pos_hint: {'center_x': 0.2, 'center_y': 0.5}
+#                     active: False
+#                     color: 1, 1, 1, 1
+
+#             # Lien mot de passe oublié
+#             MDTextButton:
+#                 text: "Mot de passe oublié ?"
+#                 theme_text_color: "Custom"
+#                 text_color: app.theme_cls.primary_color
+#                 font_style: "Caption"
+#                 size_hint_x: 1
+#                 halign: "right"
+#                 on_release: root.forgot_password()
+
+#         # Zone inscription
+#         BoxLayout:
+#             size_hint_y: None
+#             height: dp(40)
+#             pos_hint: {'center_x': 0.5}
+#             spacing: dp(5)
+
+#             MDLabel:
+#                 text: "Nouveau chez nous ?"
+#                 halign: 'right'
+#                 size_hint_x: 0.6
+#                 font_style: 'Body1'
+#                 theme_text_color: "Secondary"
+
+#             MDTextButton:
+#                 text: "Créer un compte"
+#                 theme_text_color: "Custom"
+#                 text_color: app.theme_cls.primary_dark
+#                 bold: True
+#                 on_release: root.jenaipasdecompte()
+
+#         # Espacement inférieur
+#         Widget:
+#             size_hint_y: 0.1

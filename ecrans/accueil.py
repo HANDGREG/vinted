@@ -4,6 +4,13 @@ from kivymd.app import MDApp
 from kivy.properties import ListProperty,ObjectProperty
 from database.crud   import get_all_products, deja_like , nbre_like, nbre_commentaire
 
+
+
+
+from kivy.uix.behaviors import ButtonBehavior
+from kivymd.uix.boxlayout import MDBoxLayout
+
+
 class HomeScreen(Screen):
     products = ListProperty([])
     user = ObjectProperty(None)  # Définir la propriété user
@@ -21,8 +28,8 @@ class HomeScreen(Screen):
         app= MDApp.get_running_app()
         
         app.root.get_screen("commentaire").user = self.user
-        self.parent.transition.direction = "left"
         
+      
         
         
         
@@ -51,5 +58,15 @@ class HomeScreen(Screen):
         app.root.current = "profile"
         app.root.get_screen("profile").user = self.user
         self.parent.transition.direction = "left"
-    
         
+        
+    def conversation(self):    
+        app= MDApp.get_running_app()
+        app.root.get_screen("conversations").user= self.user
+        app.root.current = "conversations"
+        
+        self.parent.transition.direction = "left"
+
+
+class ClickableBox(ButtonBehavior, MDBoxLayout):
+    pass

@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 from database.crud import create_product
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDRaisedButton, MDFlatButton, MDTextButton
 
 
 class Ajouter(Screen):
@@ -31,7 +31,7 @@ class Ajouter(Screen):
         dialog = MDDialog(
             title="Erreur",
             text=message,
-            buttons=[MDRaisedButton(text="OK", on_release=lambda x: dialog.dismiss())],
+            buttons=[MDButton(text="OK", on_release=lambda x: dialog.dismiss())],
         )
         dialog.open()
         

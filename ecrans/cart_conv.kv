@@ -1,0 +1,108 @@
+<ConversationCard@MDCard>:
+    size_hint_y: None
+    height: "80dp"
+    radius: [16, 16, 16, 16]
+    elevation: 4
+    padding: "12dp"
+    ripple_behavior: True
+    on_release: root.on_conversation_click(root.discussion_id)
+    discussion_id: None  # à renseigner lors de l'instanciation
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        spacing: "12dp"
+
+        # Avatar ou icône utilisateur
+        Image:
+            source: root.avatar if  root.avatar else "assets/default_avatar.png"
+            size_hint: None, None
+            size: "56dp", "56dp"
+            radius: [28, 28, 28, 28]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "4dp"
+            padding: 0
+
+            MDLabel:
+                text: root.user_receiver.username if root.user_receiver and root.user_receiver.username else "Utilisateur"
+                font_style: "Subtitle1"
+                bold: True
+                theme_text_color: "Primary"
+                shorten: True
+
+            MDLabel:
+                text: f"{root.sob}: {root.last_message}" if root.last_message  and root.sob else "Aucun message"
+                font_style: "Body2"
+                theme_text_color: "Secondary"
+                shorten: True
+
+            MDLabel:
+                text: root.last_date if root.last_date else ""
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                halign: "right"
+
+
+
+
+# <ConversationItem@MDBoxLayout>:
+#     orientation: 'horizontal'
+#     size_hint_y: None
+#     height: dp(80)
+#     padding: dp(10)
+#     spacing: dp(10)
+#     ripple_behavior: True
+#     on_release: app.show_conversation(root.conversation_data)
+    
+#     # Propriétés personnalisées
+#     conversation_data: None
+    
+#     # Avatar
+#     FitImage:
+#         source: root.conversation_data['avatar'] if root.conversation_data and 'avatar' in root.conversation_data else "assets/default_avatar.png"
+#         size_hint: None, 1
+#         width: self.height
+#         radius: [self.height/2,]
+    
+#     # Contenu
+#     MDBoxLayout:
+#         orientation: 'vertical'
+#         spacing: dp(5)
+        
+#         MDLabel:
+#             text: root.conversation_data['username'] if root.conversation_data else "Nouvelle conversation"
+#             font_style: "Subtitle1"
+#             bold: True
+#             theme_text_color: "Primary"
+#             halign: 'left'
+#             size_hint_y: None
+#             height: self.texture_size[1]
+        
+#         MDLabel:
+#             text: root.conversation_data['last_message'] if root.conversation_data and 'last_message' in root.conversation_data else "Aucun message"
+#             font_style: "Body2"
+#             theme_text_color: "Secondary"
+#             halign: 'left'
+#             size_hint_y: None
+#             height: self.texture_size[1]
+#             shorten: True
+#             shorten_from: 'right'
+        
+#         MDBoxLayout:
+#             size_hint_y: None
+#             height: dp(20)
+#             spacing: dp(5)
+            
+#             MDIcon:
+#                 icon: "clock-outline"
+#                 size_hint_x: None
+#                 width: dp(20)
+#                 theme_text_color: "Hint"
+#                 font_size: '12sp'
+            
+#             MDLabel:
+#                 text: root.conversation_data['last_date'] if root.conversation_data and 'last_date' in root.conversation_data else ""
+#                 font_style: "Caption"
+#                 theme_text_color: "Hint"
+#                 size_hint_x: 0.8

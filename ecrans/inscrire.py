@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from database.crud import create_user
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDRaisedButton, MDFlatButton, MDTextButton
 from kivymd.uix.dialog import MDDialog
 
 
@@ -35,7 +35,7 @@ class Register(Screen):
         dialog = MDDialog(
             title="succes",
             text=message,
-            buttons=[MDRaisedButton(text="OK", on_release=lambda x: dialog.dismiss())],
+            buttons=[MDButton(text="OK", on_release=lambda x: dialog.dismiss())],
         )
         dialog.open()    
     def compteexistant(self):

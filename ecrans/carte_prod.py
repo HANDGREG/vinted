@@ -5,7 +5,7 @@ from kivy.properties import ObjectProperty , NumericProperty
 from kivymd.uix.card import MDCard
 from kivymd.app import MDApp
 from database.crud import ajout_like,sup_like,nbre_like
-from ecrans.accueil import HomeScreen
+from .accueil import HomeScreen
 
 
 

@@ -101,3 +101,56 @@ def nbre_commentaire(produit):
 def ajout_commentaire(utilisateur,produit,commentaire):
     commentaire = Commentaire.create(utilisateur=utilisateur, produit=produit, commentaire=commentaire)
     return commentaire
+
+
+
+
+
+
+# def get_or_create_discussion(user1, user2):
+#     discussion, created = Discussion.get_or_create(
+#         ((Discussion.user1 == user1) & (Discussion.user2 == user2)) |
+#         ((Discussion.user1 == user2) & (Discussion.user2 == user1)),
+#         defaults={'user1': user1, 'user2': user2}
+#     )
+#     return discussion
+
+
+def get_or_create_discussion(user1, user2):
+    discussion = (Discussion
+                  .select()
+                  .where(
+                      ((Discussion.user1 == user1) & (Discussion.user2 == user2)) |
+                      ((Discussion.user1 == user2) & (Discussion.user2 == user1))
+                  )
+                  .first())
+    if discussion:
+        return discussion
+    else:
+        return Discussion.create(user1=user1, user2=user2)
+
+def envoi_message(sender, receiver, content):
+    discussion = get_or_create_discussion(sender, receiver)
+    message = Message.create(
+        discussion=discussion,
+        sender=sender,
+        receiver=receiver,
+        content=content
+    )
+    return message
+
+def recup_message_deux_user(user1, user2):
+    get_or_create_discussion(user1, user2)
+    return list (Message.select().where(
+                    ((Message.sender == user1) & (Message.receiver == user2)) |
+                    ((Message.sender == user2) & (Message.receiver == user1))).order_by(Message.created_at))
+# def get_discussions_for_user(user):
+#     return Discussion.select().where((Discussion.user1 == user) | (Discussion.user2 == user))
+
+
+def get_discussions_for_user(user):
+    return list(
+        Discussion.select().where(
+            (Discussion.user1 == user) | (Discussion.user2 == user)
+        )
+    )

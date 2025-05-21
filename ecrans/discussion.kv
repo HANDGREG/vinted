@@ -1,0 +1,172 @@
+<MessageBubble>:
+    size_hint_y: None
+    height: self.minimum_height
+    padding: [dp(8), dp(4), dp(8), dp(4)]
+
+    BoxLayout:
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'horizontal'
+        spacing: dp(4)
+
+        # Avatar gauche (si message reçu)
+        BoxLayout:
+            size_hint_x: None
+            width: dp(48) if not root.is_sender else 0
+            orientation: 'vertical'
+
+            FitImage:
+                source: root.avatar if not root.is_sender and root.avatar else ""
+                size_hint: None, None
+                size: [dp(36), dp(36)]
+                radius: [dp(18),]
+                pos_hint: {'center_x': 0.5}
+                opacity: 1 if not root.is_sender and root.avatar else 0
+
+        # Conteneur centré du message
+        AnchorLayout:
+            size_hint_x: 1
+            anchor_x: 'right' if root.is_sender else 'left'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                width: min(dp(300), root.width * 0.75)
+                height: self.minimum_height
+                spacing: dp(4)
+
+                MDCard:
+                    size_hint: None, None
+                    size: self.size
+                    width: self.parent.width
+                    height: lbl.height + dp(24)
+                    elevation: 1
+                    radius: [dp(18), dp(18), dp(4), dp(18)] if root.is_sender else [dp(18), dp(18), dp(18), dp(4)]
+                    md_bg_color: app.theme_cls.primary_color if root.is_sender else (0.95, 0.95, 0.95, 1) if app.theme_cls.theme_style == "Light" else (0.2, 0.2, 0.2, 1)
+                    padding: [dp(12), dp(8)]
+
+                    MDLabel:
+                        id: lbl
+                        text: root.text if root.text else ""
+                        text_color: (1, 1, 1, 1) if root.is_sender else app.theme_cls.text_color
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        size_hint_x: 1
+                        halign: 'right' if root.is_sender else 'left'
+                        valign: 'middle'
+                        text_size: self.width, None
+                        markup: True
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(16)
+                    spacing: dp(4)
+
+                    MDLabel:
+                        id: date_label
+                        text: root.last_date if hasattr(root, 'last_date') else ""
+                        font_style: "Caption"
+                        theme_text_color: "Hint"
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        halign: 'right' if root.is_sender else 'left'
+
+                    MDIcon:
+                        icon: "check-all"
+                        size_hint_x: None
+                        width: dp(16)
+                        theme_text_color: "Hint"
+                        opacity: 1 if root.is_sender else 0
+
+        # Avatar droite (si message envoyé)
+        BoxLayout:
+            size_hint_x: None
+            width: dp(48) if root.is_sender else 0
+            orientation: 'vertical'
+
+            # FitImage:
+            #     source: root.avatar if root.is_sender and root.avatar else ""
+            #     size_hint: None, None
+            #     size: [dp(36), dp(36)]
+            #     radius: [dp(18),]
+            #     pos_hint: {'center_x': 0.5}
+            #     opacity: 1 if root.is_sender and root.avatar else 0
+
+
+<DiscussionScreen>:
+    name: "discussion"
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+
+        # En-tête
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(56)
+            md_bg_color: app.theme_cls.primary_color
+            elevation: 4
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: (1, 1, 1, 1)
+                on_release: root.retour()
+
+            FitImage:
+                source: root.user_receiver.photo if root.user_receiver else ""
+                size_hint: None, None
+                size: [dp(36), dp(36)]
+                radius: [dp(18),]
+                pos_hint: {'center_y': 0.5}
+
+            MDLabel:
+                text: root.user_receiver.username if root.user_receiver else "Discussion"
+                theme_text_color: "Custom"
+                text_color: (1, 1, 1, 1)
+                font_style: "Subtitle1"
+                halign: "left"
+                valign: "center"
+                padding_x: dp(10)
+
+        # Liste des messages
+        ScrollView:
+            id: scroll_view
+            bar_width: dp(4)
+            bar_color: app.theme_cls.primary_color
+
+            RecycleView:
+                id: rv_messages
+                viewclass: "MessageBubble"
+                key_viewclass: "viewclass"
+
+                RecycleBoxLayout:
+                    default_size: None, dp(80)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(20)
+                    padding: [dp(8), dp(16), dp(8), dp(16)]
+
+        # Zone de saisie
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(80)
+            padding: [dp(8), dp(8), dp(8), dp(8)]
+            md_bg_color: app.theme_cls.bg_dark if app.theme_cls.theme_style == "Dark" else [0.95, 0.95, 0.95, 1]
+
+            MDTextField:
+                id: message_input
+                hint_text: "Écrivez un message..."
+                size_hint_x: 0.85
+                mode: "rectangle"
+                multiline: False
+
+            MDFloatingActionButton:
+                icon: "send"
+                size_hint_x: None
+                width: dp(48)
+                elevation: 0
+                md_bg_color: app.theme_cls.primary_color
+                on_release: root.send_message()
